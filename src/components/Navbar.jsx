@@ -17,8 +17,10 @@ export default function Navbar() {
   }, [])
 
   const scrollTo = (id) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
+    setTimeout(() => {
+      document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })
+    }, 300)
   }
 
   return (

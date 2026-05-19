@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FiMail } from 'react-icons/fi'
 import { FaAws } from 'react-icons/fa'
+import { SiOpenai } from 'react-icons/si'
 import {
   SiReact, SiVuedotjs, SiDjango, SiPython, SiJavascript,
   SiPostgresql, SiSqlite, SiRedis, SiDocker, SiGit, SiTailwindcss,
@@ -9,6 +10,7 @@ import {
 } from 'react-icons/si'
 
 const skills = [
+  { name: 'AI Vibe Coding', icon: SiOpenai, color: '#10a37f', level: 1000 },
   { name: 'Vue.js',      icon: SiVuedotjs,    color: '#42B883', level: 95 },
   { name: 'Redis',       icon: SiRedis,       color: '#DC382D', level: 100 },
   { name: 'Django',      icon: SiDjango,      color: '#4CAF7D', level: 92 },
@@ -46,8 +48,10 @@ function SkillCard({ skill, index }) {
         >
           <skill.icon size={20} style={{ color: skill.color }} />
         </div>
-        <span className="font-semibold text-sm" style={{ color: 'var(--text)' }}>{skill.name}</span>
-        <span className="ml-auto text-xs font-mono" style={{ color: 'var(--text-faint)' }}>{skill.level}%</span>
+        <div className="flex-1 min-w-0 flex items-center justify-between gap-1">
+          <span className="font-semibold text-xs sm:text-sm truncate" style={{ color: 'var(--text)' }}>{skill.name}</span>
+          <span className="flex-shrink-0 text-xs font-mono" style={{ color: 'var(--text-faint)' }}>{skill.level}%</span>
+        </div>
       </div>
       <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--bg-card-hover)' }}>
         <motion.div

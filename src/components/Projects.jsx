@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FiExternalLink, FiGithub, FiArrowRight, FiLock } from 'react-icons/fi'
-import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython, SiCelery, SiStripe, SiPandas, SiNextdotjs, SiBootstrap } from 'react-icons/si'
+import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython, SiCelery, SiStripe, SiPandas, SiNextdotjs, SiBootstrap, SiGooglebigquery, SiReact } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
 import { FiMail } from 'react-icons/fi'
 
@@ -158,6 +158,74 @@ function MockQuiz() {
   )
 }
 
+function MockCorporateWebsite() {
+  return (
+    <div className="absolute inset-0 p-4 flex flex-col gap-2 opacity-60 pointer-events-none select-none">
+      <div className="flex items-center justify-between h-7 rounded-lg bg-white/10 px-3 border border-white/10">
+        <div className="h-2 w-12 rounded bg-white/50" />
+        <div className="flex gap-2">
+          {[20, 16, 18].map((w, i) => <div key={i} className="h-1.5 rounded bg-white/30" style={{ width: w }} />)}
+        </div>
+      </div>
+      <div className="rounded-lg bg-white/5 border border-white/10 p-3 flex flex-col gap-1.5">
+        <div className="h-2.5 w-3/4 rounded bg-white/50" />
+        <div className="h-1.5 w-full rounded bg-white/20" />
+        <div className="h-1.5 w-2/3 rounded bg-white/20" />
+        <div className="h-5 w-20 rounded-full bg-white/30 mt-1" />
+      </div>
+      <div className="flex gap-2 flex-1">
+        {[0, 1, 2].map(i => (
+          <div key={i} className="flex-1 rounded-lg bg-white/5 border border-white/10 p-2 flex flex-col gap-1">
+            <div className="w-5 h-5 rounded bg-white/20" />
+            <div className="h-1.5 rounded bg-white/40 w-3/4" />
+            <div className="h-1 rounded bg-white/15 w-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function MockDataPipeline() {
+  const rows = ['patient_id, name, dob, diagnosis', '1001, John D., 1985-03-12, HTN', '1002, Jane S., 1990-07-22, DM2']
+  return (
+    <div className="absolute inset-0 p-4 flex flex-col gap-2 opacity-60 pointer-events-none select-none font-mono text-[9px]">
+      <div className="text-green-400/70 text-[10px] mb-1">► Processing CSV → BigQuery</div>
+      {rows.map((row, i) => (
+        <div key={i} className="flex items-center gap-2 rounded bg-white/5 border border-white/10 px-2 py-1.5">
+          <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${i === 0 ? 'bg-blue-400/70' : 'bg-green-400/70'}`} />
+          <span className="text-white/50 truncate">{row}</span>
+        </div>
+      ))}
+      <div className="flex items-center gap-2 mt-auto">
+        <div className="h-1.5 flex-1 rounded-full bg-white/10">
+          <div className="h-full w-4/5 rounded-full bg-green-500/60" />
+        </div>
+        <span className="text-green-400/60 text-[9px]">80%</span>
+      </div>
+      <div className="text-white/30">→ 3,247 rows cleaned · uploading...</div>
+    </div>
+  )
+}
+
+function MockLoanCalculator() {
+  return (
+    <div className="absolute inset-0 p-4 flex flex-col gap-2 opacity-60 pointer-events-none select-none">
+      <div className="text-[10px] text-white/50 font-mono mb-1">LOAN CALCULATOR</div>
+      {[['Loan Amount', '₱ 500,000'], ['Interest Rate', '12% / yr'], ['Term', '36 months']].map(([label, val], i) => (
+        <div key={i} className="flex items-center justify-between rounded-lg bg-white/5 border border-white/10 px-3 py-1.5">
+          <span className="text-[10px] text-white/40">{label}</span>
+          <span className="text-[10px] text-white/70 font-mono">{val}</span>
+        </div>
+      ))}
+      <div className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 mt-1">
+        <div className="text-[9px] text-white/40 mb-0.5">Monthly Payment</div>
+        <div className="text-base font-bold text-white/90">₱ 16,607</div>
+      </div>
+    </div>
+  )
+}
+
 /* ── Tag icon map ── */
 const tagIcons = {
   Django: SiDjango,
@@ -173,6 +241,9 @@ const tagIcons = {
   Pandas: SiPandas,
   'Next.js': SiNextdotjs,
   Bootstrap: SiBootstrap,
+  BigQuery: SiGooglebigquery,
+  'React.js': SiReact,
+  React: SiReact,
 }
 
 function Tag({ label }) {
@@ -439,6 +510,39 @@ const cards = [
   },
 ]
 
+const ojtCards = [
+  {
+    id: 7,
+    title: 'Elevate Solution Experts Website',
+    description: 'Corporate website developed during OJT — showcasing company services, team, and contact info. Built with Django for the backend and Bootstrap for a responsive, professional frontend.',
+    tags: ['Bootstrap', 'Django', 'PostgreSQL'],
+    gradientStyle: { background: 'linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%)' },
+    github: null,
+    live: null,
+    MockUI: MockCorporateWebsite,
+  },
+  {
+    id: 8,
+    title: 'BigQuery Data Pipeline',
+    description: 'Automated data cleaning and processing pipeline for CSV files using Python and Pandas — normalizing, deduplicating, and uploading structured records directly into Google BigQuery.',
+    tags: ['Python', 'Pandas', 'BigQuery'],
+    gradientStyle: { background: 'linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 50%, #3b82f6 100%)' },
+    github: null,
+    live: null,
+    MockUI: MockDataPipeline,
+  },
+  {
+    id: 9,
+    title: 'LeadForm Calculator',
+    description: 'Full-stack loan calculator application that computes monthly payments, total interest, and repayment schedules based on loan amount, rate, and term — built with React.js and a Django REST backend.',
+    tags: ['React.js', 'Django', 'PostgreSQL'],
+    gradientStyle: { background: 'linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #a855f7 100%)' },
+    github: null,
+    live: null,
+    MockUI: MockLoanCalculator,
+  },
+]
+
 export default function Projects() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
@@ -462,10 +566,26 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Bento grid */}
+        {/* Main work projects */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeaturedCard project={featured} />
           {cards.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i + 1} MockUI={project.MockUI} />
+          ))}
+        </div>
+
+        {/* OJT section */}
+        <div className="mt-16 mb-8">
+          <span className="font-mono text-orange-500 text-sm tracking-widest uppercase">Internship</span>
+          <h3 className="text-2xl font-bold mt-1" style={{ color: 'var(--text)' }}>
+            OJT @ <span className="gradient-text">Elevate Solution Experts</span>
+          </h3>
+          <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
+            Jan 27 – Apr 27, 2025 · 3 months
+          </p>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {ojtCards.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i + 1} MockUI={project.MockUI} />
           ))}
         </div>

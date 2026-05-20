@@ -12,6 +12,15 @@ const timeline = [
     tags: ['Django', 'Vue.js', 'React', 'PostgreSQL', 'Redis', 'Celery', 'AWS', 'Stripe', 'Brevo'],
   },
   {
+    type: 'ojt',
+    title: 'OJT Intern',
+    company: 'Elevate Solution Expert',
+    period: 'Jan 27, 2025 — Apr 27, 2025',
+    badge: 'Internship · 3 months',
+    description: 'Completed a 3-month internship building real internal tools for the company. Developed the corporate website, built a BigQuery data cleaning and processing pipeline for CSV automation, and created a full-stack loan calculator application.',
+    tags: ['Bootstrap', 'Django', 'PostgreSQL', 'Python', 'Pandas', 'BigQuery', 'React.js'],
+  },
+  {
     type: 'education',
     title: 'Bachelor of Science in Information Technology',
     company: 'Colegio De Montalban',
@@ -46,13 +55,22 @@ function TimelineItem({ item, index }) {
             <div className="flex items-center gap-2 mb-1">
               {item.type === 'work'
                 ? <FiBriefcase size={14} className="text-violet-500 flex-shrink-0" />
+                : item.type === 'ojt'
+                ? <FiBriefcase size={14} className="text-orange-500 flex-shrink-0" />
                 : <FiBook size={14} className="text-pink-500 flex-shrink-0" />
               }
               <h3 className="font-bold text-base sm:text-lg leading-tight" style={{ color: 'var(--text)' }}>
                 {item.title}
               </h3>
+              {item.badge && (
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-orange-500/15 text-orange-400 border border-orange-500/25">
+                  {item.badge}
+                </span>
+              )}
             </div>
-            <p className="font-medium text-violet-500 text-sm">{item.company}</p>
+            <p className={`font-medium text-sm ${item.type === 'ojt' ? 'text-orange-500' : 'text-violet-500'}`}>
+              {item.company}
+            </p>
           </div>
           <span className="glass px-3 py-1 rounded-lg text-xs font-mono whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>
             {item.period}

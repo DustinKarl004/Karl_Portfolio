@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FiExternalLink, FiGithub, FiArrowRight, FiLock } from 'react-icons/fi'
-import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython } from 'react-icons/si'
+import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython, SiCelery, SiStripe, SiPandas, SiNextdotjs, SiBootstrap } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
 import { FiMail } from 'react-icons/fi'
 
@@ -168,6 +168,11 @@ const tagIcons = {
   AWS: FaAws,
   Brevo: FiMail,
   Python: SiPython,
+  Celery: SiCelery,
+  Stripe: SiStripe,
+  Pandas: SiPandas,
+  'Next.js': SiNextdotjs,
+  Bootstrap: SiBootstrap,
 }
 
 function Tag({ label }) {
@@ -206,7 +211,7 @@ function FeaturedCard({ project }) {
                 <span className="text-white font-bold text-xl">{project.title[0]}</span>
               </div>
               <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-green-500/15 text-green-400 border border-green-500/25">
-                ✦ Production
+                ✦ Live
               </span>
             </div>
 
@@ -307,7 +312,7 @@ function ProjectCard({ project, index, MockUI }) {
         {/* Floating badge */}
         <div className="absolute top-3 right-3">
           <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-black/30 text-white/80 backdrop-blur-sm border border-white/20">
-            ✦ Real Work
+            {project.live ? '✦ Live' : '✦ Client Work'}
           </span>
         </div>
       </div>
@@ -373,7 +378,7 @@ const featured = {
   gradient: 'from-sky-500 via-blue-500 to-cyan-400',
   gradientStyle: { background: 'linear-gradient(135deg, #009cff 0%, #0284c7 50%, #06b6d4 100%)' },
   github: null,
-  live: null,
+  live: 'https://staging.healthmemo.com/auth/signin',
 }
 
 const cards = [

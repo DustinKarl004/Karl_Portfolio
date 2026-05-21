@@ -520,7 +520,7 @@ const cards = [
     gradientStyle: { background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%)' },
     github: null,
     image: '/portfolio_v2.webp',
-    live: 'https://karl-portfolio-zeta.vercel.app/',
+    live: 'https://dustinkarlabalos.vercel.app/',
     MockUI: MockPortfolioV2,
   },
   {

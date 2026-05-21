@@ -492,6 +492,16 @@ const featured = {
 
 const cards = [
   {
+    id: 11,
+    title: 'GenshinHub',
+    description: 'A fan-made Genshin Impact hub featuring character guides, build recommendations, tier lists, and game info — built with a clean and responsive UI.',
+    tags: ['React', 'JavaScript'],
+    gradientStyle: { background: 'linear-gradient(135deg, #1a3a5c 0%, #2563eb 50%, #7c3aed 100%)' },
+    image: '/genshinhub.webp',
+    github: null,
+    live: 'https://genshin-hub-nu.vercel.app/',
+  },
+  {
     id: 2,
     title: 'JobZing',
     description: 'Job board for Filipino remote workers that scrapes listings from OnlineJobs.ph. Includes user auth, search & filtering, saved jobs, resume builder, cover letter generator, application tracking, and Brevo email notifications.',

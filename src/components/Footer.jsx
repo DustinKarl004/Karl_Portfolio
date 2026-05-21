@@ -8,17 +8,17 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="py-10 px-6 border-t border-white/5">
+    <footer className="py-10 px-6 border-t" style={{ borderColor: 'var(--border)' }}>
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <motion.span
           whileHover={{ scale: 1.05 }}
           className="font-mono text-lg font-semibold cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="gradient-text">karl.dev</span>
+          <span className="gradient-text">dustinkarl.dev</span>
         </motion.span>
 
-        <p className="text-slate-500 text-sm flex items-center gap-1.5">
+        <p className="text-sm flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
           Built with <FiHeart size={13} className="text-pink-500" /> using React & Vite
         </p>
 

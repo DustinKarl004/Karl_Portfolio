@@ -10,7 +10,7 @@ import {
 } from 'react-icons/si'
 
 const skills = [
-  { name: 'AI Vibe Coding', icon: SiOpenai, color: '#10a37f', level: 1000 },
+  { name: 'AI Vibe Coding', icon: SiOpenai, color: '#10a37f', level: 100 },
   { name: 'Vue.js',      icon: SiVuedotjs,    color: '#42B883', level: 95 },
   { name: 'Redis',       icon: SiRedis,       color: '#DC382D', level: 100 },
   { name: 'Django',      icon: SiDjango,      color: '#4CAF7D', level: 92 },
@@ -33,13 +33,9 @@ function SkillCard({ skill, index }) {
   const inView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ y: -6, scale: 1.02 }}
-      className="glass rounded-2xl p-5 hover:border-[var(--border-hover)] transition-all group cursor-default"
+      className="glass rounded-2xl p-5 hover:border-[var(--border-hover)] hover:-translate-y-1.5 hover:scale-[1.02] transition-all duration-300 group cursor-default"
     >
       <div className="flex items-center gap-3 mb-3">
         <div
@@ -62,24 +58,15 @@ function SkillCard({ skill, index }) {
           style={{ background: `linear-gradient(90deg, ${skill.color}99, ${skill.color})` }}
         />
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export default function Skills() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
     <section id="skills" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="font-mono text-violet-500 text-sm tracking-widest uppercase">What I work with</span>
           <h2 className="text-4xl lg:text-5xl font-bold mt-3" style={{ color: 'var(--text)' }}>
             Tech <span className="gradient-text">Stack</span>
@@ -87,7 +74,7 @@ export default function Skills() {
           <p className="mt-4 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Tools and technologies I use to bring ideas to life
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {skills.map((skill, i) => (

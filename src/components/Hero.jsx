@@ -41,7 +41,7 @@ export default function Hero() {
               style={{ color: 'var(--text)' }}
             >
               Hi, I'm{' '}
-              <span className="gradient-text block">Karl</span>
+              <span className="gradient-text block">Dustin Karl</span>
             </motion.h1>
 
             <motion.div
@@ -62,8 +62,9 @@ export default function Hero() {
               className="text-base sm:text-lg leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0"
               style={{ color: 'var(--text-muted)' }}
             >
-              I craft high-performance web applications with clean code and stunning interfaces.
-              Passionate about turning ideas into impactful digital experiences.
+              Philippines-based full stack developer specializing in <span className="text-violet-400 font-medium">Django</span> and <span className="text-violet-400 font-medium">Vue.js</span>.
+              Over the past year I've shipped production apps — HIPAA-compliant SaaS platforms, job boards, and data pipelines.
+              Currently employed and always building.
             </motion.p>
 
             <motion.div
@@ -131,11 +132,12 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-600/30 via-pink-500/20 to-orange-500/30" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500 to-orange-400 flex items-center justify-center text-4xl font-bold text-white mb-4">
-                    K
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500 to-orange-400 flex items-center justify-center text-2xl font-bold text-white mb-4">
+                    DKA
                   </div>
-                  <p className="text-white font-semibold text-xl">Karl</p>
+                  <p className="text-white font-semibold text-lg">Dustin Karl Abalos</p>
                   <p className="text-sm font-mono mt-1" style={{ color: 'var(--text-muted)' }}>Full Stack Developer</p>
+                  <p className="text-xs font-mono mt-0.5" style={{ color: 'var(--text-faint)' }}>📍 Philippines</p>
                 </div>
                 <motion.div
                   animate={{ rotate: [0, 5, 0] }}
@@ -158,7 +160,7 @@ export default function Hero() {
                 <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Year Exp</div>
               </div>
               <div className="absolute -left-12 bottom-12 glass rounded-2xl px-4 py-3 text-center">
-                <div className="text-2xl font-bold gradient-text">6+</div>
+                <div className="text-2xl font-bold gradient-text">9+</div>
                 <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Projects</div>
               </div>
             </div>
@@ -171,7 +173,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex lg:hidden justify-center gap-6"
           >
-            {[{ value: '1+', label: 'Year Exp' }, { value: '6+', label: 'Projects' }].map((s) => (
+            {[{ value: '1+', label: 'Year Exp' }, { value: '9+', label: 'Projects' }, { value: 'PH', label: 'Philippines' }].map((s) => (
               <div key={s.label} className="glass rounded-2xl px-6 py-4 text-center">
                 <div className="text-2xl font-bold gradient-text">{s.value}</div>
                 <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{s.label}</div>

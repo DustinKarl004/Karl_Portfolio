@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { FiMail, FiGithub, FiSend, FiMapPin, FiCheckCircle, FiAlertCircle } from 'react-icons/fi'
 import emailjs from '@emailjs/browser'
 
@@ -21,9 +21,7 @@ const socials = [
 ]
 
 export default function Contact() {
-  const ref = useRef(null)
   const formRef = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [status, setStatus] = useState(null) // 'sending' | 'success' | 'error'
 
@@ -49,13 +47,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="font-mono text-violet-500 text-sm tracking-widest uppercase">Let's talk</span>
           <h2 className="text-4xl lg:text-5xl font-bold mt-3" style={{ color: 'var(--text)' }}>
             Get In <span className="gradient-text">Touch</span>
@@ -63,16 +55,11 @@ export default function Contact() {
           <p className="mt-4 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Have a project in mind or just want to say hi? Send me a message and I'll get back to you.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left — info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             <div className="glass rounded-3xl p-6">
               <div className="flex items-center gap-3 mb-2">
                 <FiMapPin className="text-violet-500" size={18} />
@@ -81,15 +68,12 @@ export default function Contact() {
               <p className="font-medium" style={{ color: 'var(--text)' }}>Philippines · Remote ready worldwide</p>
             </div>
 
-            {socials.map((social, i) => (
+            {socials.map((social) => (
               <motion.a
                 key={social.label}
                 href={social.href}
                 target={social.href.startsWith('mailto') ? undefined : '_blank'}
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                 whileHover={{ x: 6 }}
                 className="flex items-center gap-4 glass rounded-2xl p-4 hover:border-[var(--border-hover)] transition-all group"
               >
@@ -104,14 +88,10 @@ export default function Contact() {
                 </div>
               </motion.a>
             ))}
-          </motion.div>
+          </div>
 
           {/* Right — form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          <div>
             <form ref={formRef} onSubmit={handleSubmit} className="glass rounded-3xl p-8 space-y-5">
               <div>
                 <label className="block text-sm mb-2" style={{ color: 'var(--text-muted)' }}>Your Name</label>
@@ -194,7 +174,7 @@ export default function Contact() {
                 )}
               </motion.button>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

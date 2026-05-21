@@ -81,3 +81,23 @@ body {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
+
+.screenshot-pan {
+  object-fit: cover;
+  object-position: top;
+  transition: object-position 3s ease;
+}
+
+.group:hover .screenshot-pan {
+  object-position: bottom;
+}
+
+.screenshot-pan-x {
+  object-fit: cover;
+  object-position: left;
+  transition: object-position 3s ease;
+}
+
+.group:hover .screenshot-pan-x {
+  object-position: right;
+}

@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { FiBriefcase, FiBook } from 'react-icons/fi'
 
 const timeline = [
@@ -30,25 +29,16 @@ const timeline = [
   },
 ]
 
-function TimelineItem({ item, index }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-30px' })
-
+function TimelineItem({ item }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -30 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      className="relative pl-12 sm:pl-16"
-    >
+    <div className="relative pl-12 sm:pl-16">
       <div className="absolute left-3.5 top-5 w-5 h-5 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 -translate-x-1/2 flex items-center justify-center shadow-lg shadow-violet-500/30">
         <div className="w-2 h-2 rounded-full bg-white" />
       </div>
 
       <motion.div
         whileHover={{ x: 4 }}
-        className="glass rounded-2xl p-5 sm:p-6 hover:border-[var(--border-hover)] transition-all"
+        className="glass rounded-2xl p-5 sm:p-6 hover:border-[var(--border-hover)] transition-all duration-300"
       >
         <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
           <div>
@@ -93,36 +83,27 @@ function TimelineItem({ item, index }) {
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   )
 }
 
 export default function Experience() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
     <section id="experience" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="font-mono text-pink-500 text-sm tracking-widest uppercase">My journey</span>
           <h2 className="text-4xl lg:text-5xl font-bold mt-3" style={{ color: 'var(--text)' }}>
             Experience &{' '}
             <span className="gradient-text">Education</span>
           </h2>
-        </motion.div>
+        </div>
 
         <div className="relative">
           <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/50 via-pink-500/30 to-transparent" />
           <div className="space-y-8">
             {timeline.map((item, i) => (
-              <TimelineItem key={i} item={item} index={i} />
+              <TimelineItem key={i} item={item} />
             ))}
           </div>
         </div>

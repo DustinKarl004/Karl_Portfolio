@@ -1,9 +1,6 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { FiExternalLink, FiGithub, FiArrowRight, FiLock } from 'react-icons/fi'
-import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython, SiCelery, SiStripe, SiPandas, SiNextdotjs, SiBootstrap, SiGooglebigquery, SiReact } from 'react-icons/si'
+import { FiExternalLink, FiGithub, FiArrowRight, FiLock, FiMail } from 'react-icons/fi'
+import { SiDjango, SiVuedotjs, SiPostgresql, SiRedis, SiDocker, SiPython, SiCelery, SiStripe, SiPandas, SiNextdotjs, SiBootstrap, SiGooglebigquery, SiReact, SiJavascript } from 'react-icons/si'
 import { FaAws } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
 
 /* ── Small decorative mock-UI components ── */
 function MockDashboard() {
@@ -140,17 +137,59 @@ function MockTutorial() {
 }
 
 function MockQuiz() {
+  const options = ['JavaScript', 'Python', 'Ruby', 'Go']
   return (
-    <div className="absolute inset-0 p-4 flex flex-col items-center justify-center gap-3 opacity-60 pointer-events-none select-none">
-      <div className="w-10 h-10 rounded-full border-2 border-white/50 border-t-white animate-spin" style={{ animationDuration: '1.2s' }} />
-      <div className="text-white/70 text-[10px] font-mono tracking-wider">LOADING QUIZ...</div>
-      <div className="w-32 h-1 rounded-full bg-white/10 overflow-hidden">
-        <div className="h-full w-2/3 rounded-full bg-white/50" />
+    <div className="absolute inset-0 p-4 flex flex-col gap-2 opacity-60 pointer-events-none select-none">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-[9px] font-mono text-white/50">Question 3 of 10</span>
+        <div className="flex gap-1">
+          {[1,2,3,4,5,6,7,8,9,10].map((n) => (
+            <div key={n} className={`w-1.5 h-1.5 rounded-full ${n <= 3 ? 'bg-white/70' : 'bg-white/20'}`} />
+          ))}
+        </div>
       </div>
-      <div className="mt-2 flex gap-2">
-        {[1,2,3,4].map((n) => (
-          <div key={n} className={`w-6 h-6 rounded-full border border-white/30 flex items-center justify-center text-[9px] text-white/60 ${n <= 2 ? 'bg-white/25' : 'bg-white/5'}`}>
-            {n}
+      <div className="rounded-lg bg-white/10 border border-white/15 px-3 py-2 mb-1">
+        <div className="h-1.5 rounded bg-white/50 w-full mb-1" />
+        <div className="h-1.5 rounded bg-white/30 w-2/3" />
+      </div>
+      <div className="grid grid-cols-2 gap-1.5 flex-1">
+        {options.map((opt, i) => (
+          <div key={opt} className={`rounded-lg border px-2 py-1.5 flex items-center gap-1.5 ${i === 1 ? 'bg-white/20 border-white/40' : 'bg-white/5 border-white/15'}`}>
+            <div className={`w-3 h-3 rounded-full border flex-shrink-0 ${i === 1 ? 'border-white/70 bg-white/40' : 'border-white/30'}`} />
+            <span className="text-[9px] text-white/70">{opt}</span>
+          </div>
+        ))}
+      </div>
+      <div className="h-5 w-20 rounded-lg bg-white/25 self-end mt-1" />
+    </div>
+  )
+}
+
+function MockPortfolioV2() {
+  return (
+    <div className="absolute inset-0 p-4 flex flex-col gap-2 opacity-60 pointer-events-none select-none">
+      <div className="flex items-center justify-between mb-1">
+        <div className="h-2 w-20 rounded bg-violet-400/60 font-mono" />
+        <div className="flex gap-1.5">
+          {['bg-violet-400/40', 'bg-orange-400/40', 'bg-pink-400/40'].map((c, i) => (
+            <div key={i} className={`w-4 h-4 rounded ${c}`} />
+          ))}
+        </div>
+      </div>
+      <div className="flex-1 flex flex-col items-center justify-center gap-2">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500/70 to-orange-400/70 border border-white/20" />
+        <div className="h-2 w-28 rounded bg-white/50" />
+        <div className="h-1.5 w-20 rounded bg-violet-400/50" />
+        <div className="flex gap-1.5 mt-1">
+          <div className="h-5 w-16 rounded-xl bg-gradient-to-r from-violet-500/50 to-orange-400/50" />
+          <div className="h-5 w-16 rounded-xl bg-white/10 border border-white/20" />
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-1.5">
+        {[0, 1, 2].map(i => (
+          <div key={i} className="rounded-lg bg-white/5 border border-white/10 p-1.5 flex flex-col gap-1">
+            <div className="h-5 rounded bg-gradient-to-br from-violet-500/30 to-pink-500/30" />
+            <div className="h-1 rounded bg-white/30 w-3/4" />
           </div>
         ))}
       </div>
@@ -244,6 +283,7 @@ const tagIcons = {
   BigQuery: SiGooglebigquery,
   'React.js': SiReact,
   React: SiReact,
+  JavaScript: SiJavascript,
 }
 
 function Tag({ label }) {
@@ -261,18 +301,8 @@ function Tag({ label }) {
 
 /* ── Big featured card (HealthMemo) ── */
 function FeaturedCard({ project }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7 }}
-      whileHover={{ y: -6 }}
-      className="group col-span-1 lg:col-span-2 glass rounded-3xl overflow-hidden hover:border-[var(--border-hover)] transition-all"
-    >
+    <div className="group col-span-1 lg:col-span-2 glass rounded-3xl overflow-hidden hover:border-[var(--border-hover)] transition-all duration-300 hover:-translate-y-1.5">
       <div className="grid lg:grid-cols-2 min-h-[320px] lg:min-h-[320px]">
         {/* Left — text */}
         <div className="p-8 flex flex-col justify-between">
@@ -281,7 +311,7 @@ function FeaturedCard({ project }) {
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg" style={project.gradientStyle}>
                 <span className="text-white font-bold text-xl">{project.title[0]}</span>
               </div>
-              <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-green-500/15 text-green-400 border border-green-500/25">
+              <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-green-500/10 dark:bg-green-500/15 text-green-600 dark:text-green-400 border border-green-600/30 dark:border-green-500/25">
                 ✦ Live
               </span>
             </div>
@@ -300,17 +330,15 @@ function FeaturedCard({ project }) {
 
           <div className="flex items-center gap-3 mt-6">
             {project.live ? (
-              <motion.a
+              <a
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 text-white text-sm font-semibold shadow-lg shadow-violet-500/20"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 text-white text-sm font-semibold shadow-lg shadow-violet-500/20 hover:scale-[1.04] active:scale-[0.96] transition-transform duration-150"
               >
                 <FiExternalLink size={14} />
                 View Live
-              </motion.a>
+              </a>
             ) : (
               <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass text-sm font-medium" style={{ color: 'var(--text-faint)' }}>
                 <FiLock size={14} />
@@ -318,72 +346,85 @@ function FeaturedCard({ project }) {
               </span>
             )}
             {project.github && (
-              <motion.a
+              <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.08 }}
-                className="w-10 h-10 rounded-xl glass flex items-center justify-center transition-colors hover:text-violet-500"
+                className="w-10 h-10 rounded-xl glass flex items-center justify-center transition-all duration-150 hover:text-violet-500 hover:scale-[1.08]"
                 style={{ color: 'var(--text-muted)' }}
               >
                 <FiGithub size={16} />
-              </motion.a>
+              </a>
             )}
           </div>
         </div>
 
-        {/* Right — mock UI preview */}
+        {/* Right — preview */}
         <div
-          className="relative min-h-[220px] lg:min-h-0 opacity-90 overflow-hidden"
-          style={project.gradientStyle}
+          className="relative min-h-[220px] lg:min-h-0 overflow-hidden"
+          style={project.image ? {} : project.gradientStyle}
         >
-          {/* Subtle grid */}
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-          <MockDashboard />
-          {/* Glow */}
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+          {project.image ? (
+            <>
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full screenshot-pan-x"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/40 to-transparent" />
+            </>
+          ) : (
+            <>
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+              <MockDashboard />
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+            </>
+          )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 /* ── Regular card ── */
-function ProjectCard({ project, index, MockUI }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-50px' })
-
+function ProjectCard({ project, MockUI, isOJT }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.12 }}
-      whileHover={{ y: -8 }}
-      className="group glass rounded-3xl overflow-hidden hover:border-[var(--border-hover)] transition-all flex flex-col"
-    >
+    <div className="group glass rounded-3xl overflow-hidden hover:border-[var(--border-hover)] transition-all duration-300 hover:-translate-y-2 flex flex-col">
       {/* Preview area */}
-      <div className="relative h-44 overflow-hidden flex-shrink-0" style={project.gradientStyle}>
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
-            backgroundSize: '20px 20px',
-          }}
-        />
-        {MockUI && <MockUI />}
+      <div
+        className="relative h-56 overflow-hidden flex-shrink-0"
+        style={project.image ? {} : project.gradientStyle}
+      >
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full screenshot-pan"
+          />
+        ) : (
+          <>
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
+                backgroundSize: '20px 20px',
+              }}
+            />
+            {MockUI && <MockUI />}
+          </>
+        )}
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/40 to-transparent" />
 
         {/* Floating badge */}
         <div className="absolute top-3 right-3">
           <span className="px-2.5 py-1 rounded-full text-xs font-mono bg-black/30 text-white/80 backdrop-blur-sm border border-white/20">
-            {project.live ? '✦ Live' : '✦ Client Work'}
+            {project.live ? '✦ Live' : isOJT ? '✦ OJT' : '✦ Client Work'}
           </span>
         </div>
       </div>
@@ -403,17 +444,15 @@ function ProjectCard({ project, index, MockUI }) {
 
         <div className="flex items-center gap-2 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
           {project.live ? (
-            <motion.a
+            <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-semibold shadow-md shadow-orange-500/20"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 text-white text-sm font-semibold shadow-md shadow-orange-500/20 hover:scale-[1.04] active:scale-[0.96] transition-transform duration-150"
             >
               <FiExternalLink size={13} />
               View Live
-            </motion.a>
+            </a>
           ) : (
             <span
               className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl glass text-xs font-medium"
@@ -424,20 +463,19 @@ function ProjectCard({ project, index, MockUI }) {
             </span>
           )}
           {project.github && (
-            <motion.a
+            <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:text-violet-500 transition-colors"
+              className="w-10 h-10 rounded-xl glass flex items-center justify-center transition-all duration-150 hover:text-violet-500 hover:scale-[1.1]"
               style={{ color: 'var(--text-muted)' }}
             >
               <FiGithub size={15} />
-            </motion.a>
+            </a>
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -446,8 +484,8 @@ const featured = {
   title: 'HealthMemo MVP',
   description: 'HIPAA-compliant medicolegal case management system built with Django and Vue.js 3. Features OCR document processing, async task queues via Celery & Redis, AWS S3 cloud storage, Stripe billing, and a full multi-tenant admin dashboard — deployed via Docker.',
   tags: ['Django', 'Vue.js', 'Celery', 'Redis', 'PostgreSQL', 'AWS', 'Stripe', 'Docker'],
-  gradient: 'from-sky-500 via-blue-500 to-cyan-400',
   gradientStyle: { background: 'linear-gradient(135deg, #009cff 0%, #0284c7 50%, #06b6d4 100%)' },
+  image: '/healthmemo.webp',
   github: null,
   live: 'https://staging.healthmemo.com/auth/signin',
 }
@@ -458,8 +496,8 @@ const cards = [
     title: 'JobZing',
     description: 'Job board for Filipino remote workers that scrapes listings from OnlineJobs.ph. Includes user auth, search & filtering, saved jobs, resume builder, cover letter generator, application tracking, and Brevo email notifications.',
     tags: ['Django', 'Vue.js', 'PostgreSQL', 'Celery', 'Brevo'],
-    gradient: 'from-violet-500 via-purple-600 to-blue-600',
     gradientStyle: { background: 'linear-gradient(135deg, #734afe 0%, #5b3fd4 50%, #3a56d4 100%)' },
+    image: '/jobzing.webp',
     github: null,
     live: 'https://jobzingapp.com',
     MockUI: MockJobBoard,
@@ -468,20 +506,30 @@ const cards = [
     id: 3,
     title: 'AU Medico Legal IME',
     description: 'Python scraper that gathers and consolidates Independent Medical Expert (IME) data from Australian medico-legal websites — combining expert specialties, locations, accreditations, and contacts into a single Excel/CSV output.',
-    tags: ['Python', 'BeautifulSoup4', 'Pandas', 'Requests', 'lxml', 'openpyxl'],
-    gradient: 'from-teal-500 via-emerald-600 to-green-500',
+    tags: ['Python', 'Pandas'],
     gradientStyle: { background: 'linear-gradient(135deg, #0d9488 0%, #059669 50%, #16a34a 100%)' },
     github: null,
     live: null,
     MockUI: MockScraper,
   },
   {
+    id: 10,
+    title: 'Personal Portfolio v2',
+    description: 'This portfolio — built with React and Vite featuring glassmorphism design, dark/light mode, CSS-only hover animations, mock UI previews per project, and fully responsive layout.',
+    tags: ['React', 'JavaScript'],
+    gradientStyle: { background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%)' },
+    github: null,
+    image: '/portfolio_v2.webp',
+    live: 'https://karl-portfolio-zeta.vercel.app/',
+    MockUI: MockPortfolioV2,
+  },
+  {
     id: 4,
     title: 'Personal Portfolio v1',
-    description: 'My first portfolio website — built with HTML, CSS & Bootstrap featuring glassmorphism design, Lottie animations, dark/light mode toggle, and sections for skills, projects, and contact.',
-    tags: ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'Lottie'],
-    gradient: 'from-amber-400 via-orange-500 to-rose-500',
+    description: 'My first portfolio website — built with Bootstrap and JavaScript featuring glassmorphism design, dark/light mode toggle, and sections for skills, projects, and contact.',
+    tags: ['Bootstrap', 'JavaScript'],
     gradientStyle: { background: 'linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #f43f5e 100%)' },
+    image: '/portfolio_v1.webp',
     github: null,
     live: 'https://my-website-coral-beta.vercel.app/home.html',
     MockUI: MockPortfolio,
@@ -490,9 +538,9 @@ const cards = [
     id: 5,
     title: 'Full Stack Tutorial',
     description: 'A comprehensive educational platform with step-by-step web development tutorials — covering frontend, backend, deployment and beyond. Organized by difficulty with beginner to intermediate learning paths.',
-    tags: ['Next.js', 'React', 'CSS'],
-    gradient: 'from-blue-400 via-sky-500 to-cyan-400',
+    tags: ['Next.js', 'React'],
     gradientStyle: { background: 'linear-gradient(135deg, #3498DB 0%, #0ea5e9 50%, #06b6d4 100%)' },
+    image: '/fullstack_tutorial.webp',
     github: null,
     live: 'https://full-stack-tutorial-gamma.vercel.app/',
     MockUI: MockTutorial,
@@ -500,10 +548,10 @@ const cards = [
   {
     id: 6,
     title: 'Interactive Quiz',
-    description: 'An engaging interactive quiz application with a vibrant animated UI, smooth loading transitions, and a clean quiz flow — built entirely with vanilla HTML, CSS, and JavaScript.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    gradient: 'from-violet-600 via-purple-600 to-blue-500',
+    description: 'An engaging interactive quiz application with a clean quiz flow, score tracking, and instant feedback — built entirely with vanilla JavaScript.',
+    tags: ['JavaScript'],
     gradientStyle: { background: 'linear-gradient(135deg, #6a11cb 0%, #8b5cf6 50%, #2575fc 100%)' },
+    image: '/quiz_time.webp',
     github: null,
     live: 'https://interactive-quiz-xi.vercel.app/',
     MockUI: MockQuiz,
@@ -544,19 +592,10 @@ const ojtCards = [
 ]
 
 export default function Projects() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="font-mono text-orange-500 text-sm tracking-widest uppercase">What I've built</span>
           <h2 className="text-4xl lg:text-5xl font-bold mt-3" style={{ color: 'var(--text)' }}>
             Real <span className="gradient-text">Projects</span>
@@ -564,13 +603,13 @@ export default function Projects() {
           <p className="mt-4 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Production applications I've built and shipped at work
           </p>
-        </motion.div>
+        </div>
 
         {/* Main work projects */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeaturedCard project={featured} />
-          {cards.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i + 1} MockUI={project.MockUI} />
+          {cards.map((project) => (
+            <ProjectCard key={project.id} project={project} MockUI={project.MockUI} />
           ))}
         </div>
 
@@ -585,31 +624,24 @@ export default function Projects() {
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {ojtCards.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i + 1} MockUI={project.MockUI} />
+          {ojtCards.map((project) => (
+            <ProjectCard key={project.id} project={project} MockUI={project.MockUI} isOJT />
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7 }}
-          className="text-center mt-12"
-        >
-          <motion.a
+        <div className="text-center mt-12">
+          <a
             href="https://github.com/DustinKarl004"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 glass px-6 py-3 rounded-2xl hover:border-violet-500/30 transition-all text-sm font-medium"
+            className="inline-flex items-center gap-2 glass px-6 py-3 rounded-2xl hover:border-violet-500/30 transition-all duration-150 hover:scale-[1.05] active:scale-[0.95] text-sm font-medium"
             style={{ color: 'var(--text-muted)' }}
           >
             <FiGithub size={16} />
-            See more on GitHub
+            Dustin Karl Abalos · GitHub
             <FiArrowRight size={14} />
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
     </section>
   )

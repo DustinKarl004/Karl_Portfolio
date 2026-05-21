@@ -38,7 +38,7 @@ export default function Navbar() {
           className="font-mono text-lg font-semibold cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="gradient-text">karl.dev</span>
+          <span className="gradient-text">dustinkarl.dev</span>
         </motion.span>
 
         {/* Desktop links */}
@@ -81,7 +81,7 @@ export default function Navbar() {
             onClick={() => scrollTo('Contact')}
             className="px-5 py-2 rounded-full bg-gradient-to-r from-violet-600 to-orange-500 text-white text-sm font-medium"
           >
-            Hire Me
+            Contact Me
           </motion.button>
         </ul>
 
